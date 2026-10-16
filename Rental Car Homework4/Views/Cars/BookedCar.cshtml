@@ -1,0 +1,33 @@
+﻿@model List<Car>
+<html>
+<body>
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-dark d-flex justify-content-center m-3">Booked Cars</h1>
+        <a class="text-dark" asp-controller="Cars" asp-action="Index">Back to Cars</a>
+    </div>
+    @if (Model.Count == 0)
+    {
+        <div class="d-flex justify-content-center align-items-center h-100"><p class="fs-2">No Car Booked Yet</p></div>                    
+    }
+    else
+    {
+        <table class="table table-striped h-100 table-hover">
+            <thead class="bg-black text-light">
+                <th>ID</th>
+                <th>Car Name</th>
+                <th>Price Per Day</th>
+                <th>Status</th>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.name</td>
+                    <td>@item.pricePerDay</td>
+                    <td><div class="badge bg-warning text-dark fw-medium" style="letter-spacing: 0.05em;">Booked</div></td>
+                </tr>
+            }
+        </table>
+    }
+    </body>
+</html>
