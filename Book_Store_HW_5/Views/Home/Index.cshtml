@@ -1,0 +1,187 @@
+﻿@model HomeViewModel
+@section Styles{
+    <style>
+        .book-card {
+            background-color: #ffffff;
+            width: 300px;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .label {
+            font-size: 11px;
+            color: #64748b;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .book-title {
+            font-size: 22px;
+            color: #18253b;
+            margin-bottom: 10px;
+        }
+
+        .author {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #e9edf3;
+            margin: 22px 0;
+        }
+
+        .price-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 5px;
+            vertical-align:middle;
+        }
+
+        .price {
+            font-size: 23px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .price-style{
+            display:flex;
+            flex-direction:row;
+            justify-content:space-between;
+            align-items:center;
+        }
+    </style>
+}
+
+<html>
+    <body>
+        <div class="d-flex flex-column gap-5">
+            <div class="d-flex flex-row justify-content-between">
+                <div><h2>All Books</h2></div>
+                <div class="d-flex flex-row gap-3">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookModal">Add A Book</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAuthorModal">Add Author</button>
+                </div>
+            </div>
+        <div class="row justify-content-evenly gap-3">
+            @if (Model.books.Count > 0)
+                {
+
+                    @foreach (var item in Model.books)
+                    {
+                        <div class="book-card col-3">
+                            <p class="label">BOOK DETAILS @item.Id</p>
+
+                            <h2 class="book-title">@item.Title</h2>
+
+                            <p class="author">@item.AuthorName</p>
+
+                            <div class="divider"></div>
+
+                            <div class="price-style">
+                                <p class="price-label">Price</p>
+                                <p class="price">@item.Price</p>
+                            </div>
+                            <form method="post" action="@Url.Action("RemoveBook", "Home")" id="@item.Id">
+                                <input type="hidden" value=@item.Id name="id"/>
+                                <button type="button" class="btn btn-danger" onclick="deleteBook('@item.Id')">
+                                    Remove
+                                </button>
+                            </form>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="text-center fw-bold fs-3">No Books Found</div>
+                }
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" id="addBookModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Book</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="Post" action="\Home\AddBook">
+                        <div class="modal-body d-flex flex-column gap-2">
+                            <div>
+                                <label for="inputEmail4" class="form-label">Title</label>
+                                <input type="text" class="form-control" name="title" id="title">
+                            </div>
+                            <div>
+                                <label for="price" class="form-label">Price</label>
+                                <input type="text" class="form-control" name="price" id="price">
+                            </div>
+                            <div>
+                                <label for="author" class="form-label">Author</label>
+                                <select id="inputState" class="form-select" name="authorId">
+                                    @foreach (var item in Model.authors)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add Book</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="addAuthorModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Author</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="Post" action="\Home\AddAuthor">
+                        <div class="modal-body d-flex flex-column gap-2">
+                            <div>
+                                <label for="name" class="form-label">Author Name</label>
+                                <input type="text" class="form-control" name="name" id="name">
+                            </div>
+                            <div>
+                                <label for="country" class="form-label">Country</label>
+                                <input type="text" class="form-control" name="country" id="country">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add Author</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+
+@section Scripts{
+    <script>
+        function deleteBook(id) {
+            const response = confirm(
+                "Are you sure you want to remove this book?"
+            );
+            if (response) {
+                console.log(document.getElementById(id).id)
+                document.getElementById(id).submit();
+            }
+        }
+    </script>
+}
