@@ -1,0 +1,318 @@
+/* Shared colors */
+:root {
+  --green: #003f2e;
+  --cream: #fff8f5;
+  --soft: #faf2ee;
+}
+
+body {
+  background-color: var(--cream);
+  color: #263b30;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+h1, h2, .serif {
+  color: var(--green);
+  font-family: Georgia, serif;
+  font-weight: 500;
+}
+
+a {
+  color: var(--green);
+}
+
+.section-label {
+  color: #985100;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Bootstrap theme changes */
+.btn-success {
+  --bs-btn-bg: var(--green);
+  --bs-btn-border-color: var(--green);
+  --bs-btn-hover-bg: #07583f;
+  --bs-btn-hover-border-color: #07583f;
+}
+
+.text-bg-warning {
+  background-color: #ffdcc3 !important;
+  color: #6e3900 !important;
+}
+
+.card {
+  border: 1px solid #eee8e3;
+  border-radius: 14px;
+}
+
+.soft-panel {
+  background-color: var(--soft);
+  border-radius: 14px;
+}
+
+.brand-logo {
+  width: 174px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.logo-mark {
+  width: 58px;
+  height: 58px;
+}
+
+.profile-photo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Registration pages */
+.registration-page {
+  max-width: 780px;
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-section {
+  min-width: 0;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  background: white;
+  border: 1px solid #eee8e3;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.section-heading {
+  float: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 0;
+  padding: 1.2rem 1.5rem;
+  background: var(--soft);
+  font-size: 1rem;
+}
+
+.section-heading strong,
+.section-heading small {
+  display: block;
+}
+
+.section-heading small {
+  color: #637067;
+  font-size: 0.75rem;
+}
+
+.section-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+}
+
+.form-label {
+  font-size: 0.85rem;
+}
+
+.form-control,
+.form-select {
+  min-height: 46px;
+  background-color: var(--soft);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #7aab95;
+  box-shadow: 0 0 0 0.2rem rgba(0, 63, 46, 0.12);
+}
+
+.upload-tile {
+  height: 100%;
+  padding: 1.2rem;
+  background: var(--soft);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.upload-tile > .bi {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.upload-tile .form-control {
+  min-height: auto;
+  padding: 0.35rem;
+  background: white;
+  font-size: 0.7rem;
+}
+
+.form-check-input:checked {
+  background-color: var(--green);
+  border-color: var(--green);
+}
+
+/* Login pages */
+.login-page {
+  max-width: 520px;
+}
+
+.login-card {
+  padding: 2rem;
+  background: var(--soft);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 63, 46, 0.07);
+}
+
+.login-card .form-control {
+  background: white;
+}
+
+.role-switch {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.35rem;
+  background: #ebe5e0;
+  border-radius: 12px;
+}
+
+.role-switch a {
+  flex: 1;
+  padding: 0.6rem;
+  color: var(--green);
+  text-align: center;
+  text-decoration: none;
+  border-radius: 9px;
+}
+
+.role-switch a.active {
+  background: white;
+  font-weight: bold;
+}
+
+/* Customer home */
+.hero-panel {
+  background: var(--green);
+  color: white;
+  border-radius: 18px;
+}
+
+.hero-panel h1 {
+  color: white;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+}
+
+.hero-panel .lead {
+  color: #b2d3c2;
+}
+
+.hero-image {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.product-photo {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+#gaming .product-photo {
+  filter: grayscale(1);
+}
+
+.price-panel {
+  padding: 1rem;
+  background: var(--soft);
+  border-radius: 12px;
+}
+
+.step-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 155px;
+  background: var(--soft);
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.verification-image {
+  object-fit: contain;
+}
+
+.bulk-image {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: var(--green);
+  color: white;
+  border-radius: 10px;
+  font-size: 1.3rem;
+}
+
+.page-footer {
+  background: var(--soft);
+}
+
+/* Admin dashboard */
+.stat-card {
+  border-top: 4px solid var(--green);
+}
+
+.verification-note {
+  padding: 1.5rem;
+  background: var(--green);
+  color: white;
+  border-radius: 14px;
+}
+
+.verification-note h2 {
+  color: white;
+}
+
+.table th {
+  background-color: #f1ebe7;
+}
+
+@media (max-width: 575px) {
+  .hero-image {
+    height: 230px;
+  }
+
+  .login-card {
+    padding: 1.3rem;
+  }
+}

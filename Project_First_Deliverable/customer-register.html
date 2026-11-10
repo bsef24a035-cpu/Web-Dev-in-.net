@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Registration | QistFlow</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+  <main class="registration-page container py-5">
+    <header class="intro">
+      <a href="customer-home.html">
+        <img src="assets/logo.svg" class="brand-logo mb-3" alt="QistFlow">
+      </a>
+      <p class="section-label">Step 1 of 2: Customer identity profile</p>
+      <h1>Register for Installment Eligibility</h1>
+      <p class="text-secondary">
+        Complete your profile with your account details, identity documents,
+        and residential address.
+      </p>
+    </header>
+
+    <!-- Names are omitted so this demo does not send passwords or documents. -->
+    <form action="customer-login.html" method="get">
+      <fieldset class="form-section">
+        <legend class="section-heading">
+          <span class="section-number">1</span>
+          <span>
+            <strong>Account Credentials</strong>
+            <small>Primary contact and account details</small>
+          </span>
+          <i class="bi bi-lock ms-auto" aria-hidden="true"></i>
+        </legend>
+
+        <div class="p-4">
+          <div class="mb-3">
+            <label for="full-name" class="form-label">Full Name (As per CNIC)</label>
+            <input id="full-name" type="text" class="form-control"
+                   placeholder="Enter your full name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input id="email" type="email" class="form-control"
+                   placeholder="you@example.com" required>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="password" class="form-label">Security Password</label>
+              <input id="password" type="password" class="form-control"
+                     minlength="8" placeholder="At least 8 characters" required>
+            </div>
+            <div class="col-md-6">
+              <label for="confirm-password" class="form-label">Confirm Password</label>
+              <input id="confirm-password" type="password" class="form-control"
+                     minlength="8" placeholder="Enter password again" required>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section">
+        <legend class="section-heading">
+          <span class="section-number">2</span>
+          <span>
+            <strong>Identity &amp; Physical Verification</strong>
+            <small>CNIC documents and residential address</small>
+          </span>
+          <span class="badge text-bg-warning ms-auto">Required</span>
+        </legend>
+
+        <div class="p-4">
+          <div class="mb-4">
+            <label for="cnic" class="form-label">
+              National Identity Card (CNIC) Number
+            </label>
+            <input id="cnic" type="text" class="form-control"
+                   inputmode="numeric" pattern="[0-9]{13}" maxlength="13"
+                   placeholder="4210158392812" required>
+            <div class="form-text">Enter 13 digits without dashes.</div>
+          </div>
+
+          <p class="form-label">Official CNIC Document Scans</p>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <div class="upload-tile">
+                <i class="bi bi-person-vcard" aria-hidden="true"></i>
+                <label for="cnic-front" class="form-label">Upload CNIC Front</label>
+                <p class="small text-secondary">JPG / PNG, maximum 3MB</p>
+                <input id="cnic-front" type="file" class="form-control"
+                       accept="image/jpeg,image/png" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="upload-tile">
+                <i class="bi bi-credit-card-2-back" aria-hidden="true"></i>
+                <label for="cnic-back" class="form-label">Upload CNIC Back</label>
+                <p class="small text-secondary">JPG / PNG, maximum 3MB</p>
+                <input id="cnic-back" type="file" class="form-control"
+                       accept="image/jpeg,image/png" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="street-address" class="form-label">
+              House / Apartment &amp; Street Address
+            </label>
+            <input id="street-address" type="text" class="form-control"
+                   placeholder="House number, building, and street" required>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="area" class="form-label">Area / Sector</label>
+              <input id="area" type="text" class="form-control"
+                     placeholder="Your area" required>
+            </div>
+            <div class="col-md-4">
+              <label for="city" class="form-label">City</label>
+              <select id="city" class="form-select" required>
+                <option value="" selected disabled>Select city</option>
+                <option>Karachi</option>
+                <option>Lahore</option>
+                <option>Islamabad</option>
+                <option>Rawalpindi</option>
+                <option>Peshawar</option>
+                <option>Quetta</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="province" class="form-label">Province / Territory</label>
+              <select id="province" class="form-select" required>
+                <option value="" selected disabled>Select province</option>
+                <option>Sindh</option>
+                <option>Punjab</option>
+                <option>Islamabad Capital Territory</option>
+                <option>Khyber Pakhtunkhwa</option>
+                <option>Balochistan</option>
+                <option>Gilgit-Baltistan</option>
+                <option>Azad Jammu and Kashmir</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="soft-panel p-4 mb-4">
+        <div class="form-check">
+          <input id="authenticity" type="checkbox" class="form-check-input" required>
+          <label for="authenticity" class="form-check-label">
+            I confirm that the CNIC information and documents submitted are authentic.
+          </label>
+        </div>
+        <p class="small text-secondary mt-2 mb-0">
+          Booking eligibility is subject to document review and store approval.
+        </p>
+      </div>
+
+      <button type="submit" class="btn btn-success w-100 py-3">
+        <i class="bi bi-send me-2" aria-hidden="true"></i>
+        Create Account &amp; Send Email OTP
+      </button>
+      <p class="small text-secondary mt-3">
+        Demonstration only: this opens the login page. No account, OTP,
+        or document upload is sent.
+      </p>
+    </form>
+
+    <footer class="text-center mt-4">
+      <p>Already have an account? <a href="customer-login.html">Sign in here</a></p>
+      <a href="customer-home.html">Customer home</a>
+      <span class="mx-2">·</span>
+      <a href="admin-register.html">Register a shop</a>
+    </footer>
+  </main>
+</body>
+</html>
