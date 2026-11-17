@@ -1,0 +1,140 @@
+@page
+@model QistFlow.Areas.Identity.Pages.Account.LoginModel
+@{
+    var isAdmin = Model.Portal == "Admin";
+    ViewData["Title"] = isAdmin ? "Admin Login" : "Customer Login";
+    <style>
+        a {
+            text-decoration: none;
+            color: #003f2e;
+        }
+        .text-bg-warning {
+            background-color: #ffdcc3 !important;
+            color: #6e3900 !important;
+        }
+
+        .card {
+            border: 1px solid #eee8e3;
+            border-radius: 14px;
+        }
+
+        .soft-panel {
+            background-color: var(--soft);
+            border-radius: 14px;
+        }
+
+        .brand-logo {
+            width: 174px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .logo-mark {
+            width: 58px;
+            height: 58px;
+        }
+
+        .login-page {
+            max-width: 520px;
+        }
+
+        .login-card {
+            padding: 2rem;
+            background: var(--soft);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 63, 46, 0.07);
+        }
+
+            .login-card .form-control {
+                background: white;
+            }
+
+        .role-switch {
+            display: flex;
+            gap: 0.3rem;
+            padding: 0.35rem;
+            background: #ebe5e0;
+            border-radius: 12px;
+        }
+
+            .role-switch a {
+                flex: 1;
+                padding: 0.6rem;
+                color: var(--green);
+                text-align: center;
+                text-decoration: none;
+                border-radius: 9px;
+            }
+
+                .role-switch a.active {
+                    background: white;
+                    font-weight: bold;
+    </style>
+}
+<main class="login-page container py-5">
+    <section class="login-card">
+        <header class="text-center mb-4">
+            <img src="~/assets/logo-mark.svg" class="logo-mark mb-3" alt="QistFlow emblem" />
+            <h1>QistFlow</h1>
+            <p class="text-secondary">Installment Booking &amp; Verification Management</p>
+        </header>
+
+        <nav class="role-switch mb-3" aria-label="Login role">
+            <a asp-area="Identity" asp-page="/Account/Login" asp-route-portal="Customer"
+               class="@(isAdmin ? "" : "active")" aria-current="@(isAdmin ? null : "page")">
+                <i class="bi bi-person me-1" aria-hidden="true"></i> Customer
+            </a>
+            <a asp-area="Identity" asp-page="/Account/Login" asp-route-portal="Admin"
+               class="@(isAdmin ? "active" : "")" aria-current="@(isAdmin ? "page" : null)">
+                <i class="bi bi-shop me-1" aria-hidden="true"></i> Shop Admin
+            </a>
+        </nav>
+
+        <div class="bg-white rounded-3 p-3 mb-4 small">
+            <i class="bi @(isAdmin ? "bi-shop" : "bi-person-check") me-2" aria-hidden="true"></i>
+            @(isAdmin ? "Open the shop dashboard to view bookings and inventory." : "Sign in to explore products and installment plans.")
+        </div>
+
+        <form method="post" asp-page="/Account/Login">
+            <input type="hidden" asp-for="Portal" />
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-3" role="alert"></div>
+            <div class="mb-3">
+                <label asp-for="Input.Email" class="form-label">@(isAdmin ? "Admin Email Address" : "Email Address")</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope" aria-hidden="true"></i></span>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="you@example.com" />
+                </div>
+                <span asp-validation-for="Input.Email" class="text-danger small"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="Input.Password" class="form-label">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock" aria-hidden="true"></i></span>
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" />
+                </div>
+                <span asp-validation-for="Input.Password" class="text-danger small"></span>
+            </div>
+            <button type="submit" class="btn btn-success w-100 py-3">
+                @(isAdmin ? "Sign In to Admin Portal" : "Sign In to Customer Portal")
+            </button>
+        </form>
+
+        <footer class="text-center mt-4">
+            @if (isAdmin)
+            {
+                <p class="small text-secondary">Admin accounts are created by the application owner only.</p>
+                <a asp-controller="Home" asp-action="Index" asp-area="">Customer home</a>
+            }
+            else
+            {
+                <p>New customer? <a asp-area="Identity" asp-page="/Account/Register">Create an account</a></p>
+                <a asp-controller="Home" asp-action="Index" asp-area="">Back to customer home</a>
+            }
+        </footer>
+    </section>
+</main>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

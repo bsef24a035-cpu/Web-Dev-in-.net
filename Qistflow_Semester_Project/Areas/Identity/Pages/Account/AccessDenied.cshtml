@@ -1,0 +1,12 @@
+@page
+@{
+    ViewData["Title"] = "Access Denied";
+}
+<main class="login-page container py-5">
+    <section class="login-card text-center">
+        <i class="bi bi-shield-lock fs-1" aria-hidden="true"></i>
+        <h1 class="h2 mt-3">Access Denied</h1>
+        <p class="text-secondary">Only an authorized QistFlow admin can open this page.</p>
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-success">Back to customer home</a>
+    </section>
+</main>

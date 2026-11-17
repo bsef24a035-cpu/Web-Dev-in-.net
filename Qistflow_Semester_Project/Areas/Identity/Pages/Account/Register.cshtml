@@ -1,0 +1,202 @@
+@page
+@model QistFlow.Areas.Identity.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Customer Registration";
+    <style>
+        .text-bg-warning {
+            background-color: #ffdcc3 !important;
+            color: #6e3900 !important;
+        }
+
+        .card {
+            border: 1px solid #eee8e3;
+            border-radius: 14px;
+        }
+
+        .soft-panel {
+            background-color: var(--soft);
+            border-radius: 14px;
+        }
+
+        .brand-logo {
+            width: 174px !important;
+            height: 44px !important;
+            object-fit: contain;
+        }
+
+        .logo-mark {
+            width: 58px;
+            height: 58px;
+        }
+
+        .profile-photo {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .registration-page {
+            max-width: 780px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            min-width: 0;
+            padding: 0;
+            margin-bottom: 1.5rem;
+            background: white;
+            border: 1px solid #eee8e3;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .section-heading {
+            float: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            margin: 0;
+            padding: 1.2rem 1.5rem;
+            background: var(--soft);
+            font-size: 1rem;
+        }
+
+            .section-heading strong,
+            .section-heading small {
+                display: block;
+            }
+
+            .section-heading small {
+                color: #637067;
+                font-size: 0.75rem;
+            }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--green);
+            color: white;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+        }
+
+        .form-control,
+        .form-select {
+            min-height: 46px;
+            background-color: var(--soft);
+            border: 1px solid transparent;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+            .form-control:focus,
+            .form-select:focus {
+                border-color: #7aab95;
+                box-shadow: 0 0 0 0.2rem rgba(0, 63, 46, 0.12);
+            }
+
+        .upload-tile {
+            height: 100%;
+            padding: 1.2rem;
+            background: var(--soft);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+            .upload-tile > .bi {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-size: 1.8rem;
+            }
+
+            .upload-tile .form-control {
+                min-height: auto;
+                padding: 0.35rem;
+                background: white;
+                font-size: 0.7rem;
+            }
+
+        .form-check-input:checked {
+            background-color: var(--green);
+            border-color: var(--green);
+        }
+
+        a {
+            text-decoration: none;
+            color: #003f2e;
+        }
+    </style>
+}
+<main class="registration-page container py-5">
+    <header class="intro">
+        <a asp-controller="Home" asp-action="Index" asp-area="">
+            <img src="~/assets/logo.svg" class="brand-logo mb-3" alt="QistFlow" />
+        </a>
+        <p class="section-label">Customer account registration</p>
+        <h1>Create Your QistFlow Account</h1>
+        <p class="text-secondary">Register using email and password to browse installment plans.</p>
+    </header>
+
+    <form method="post" asp-page="/Account/Register">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+        <fieldset class="form-section">
+            <legend class="section-heading">
+                <span class="section-number">1</span>
+                <span>
+                    <strong>Account Credentials</strong>
+                    <small>Email and password</small>
+                </span>
+                <i class="bi bi-lock ms-auto" aria-hidden="true"></i>
+            </legend>
+
+            <div class="p-4">
+                <div class="mb-3">
+                    <label asp-for="Input.Email" class="form-label">Email Address</label>
+                    <input asp-for="Input.Email" class="form-control" placeholder="you@example.com"
+                           autocomplete="username" />
+                    <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Input.Password" class="form-label">Password</label>
+                        <input asp-for="Input.Password" class="form-control"
+                               autocomplete="new-password" placeholder="Enter password" />
+                        <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password</label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control"
+                               autocomplete="new-password" placeholder="Enter password again" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-success w-100 py-3">
+            <i class="bi bi-person-plus me-2" aria-hidden="true"></i>Create Customer Account
+        </button>
+    </form>
+
+    <footer class="text-center mt-4">
+        <p>Already have an account? <a asp-area="Identity" asp-page="/Account/Login" asp-route-portal="Customer">Sign in here</a></p>
+        <a asp-controller="Home" asp-action="Index" asp-area="">Customer home</a>
+    </footer>
+</main>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
