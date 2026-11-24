@@ -6,10 +6,9 @@ namespace Qistflow_Semester_Project.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
-            if (User.IsInRole("Admin"))
-                return RedirectToAction("Index", "Admin");
             return View();
         }
     }

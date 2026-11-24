@@ -1,0 +1,72 @@
+﻿@using Qistflow_Semester_Project.Models.ViewModel
+@model ProductDetails
+<input name="productId" type="number" value="@Model.Product.productId" hidden />
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <label for="Name" class="form-label">Product Name</label>
+        <input for="Name" name="Name" value="@Model.Product.Name" class="form-control bg-white border-black border-1 rounded-0" placeholder="e.g. MacBook Air M2" required />
+        <span for="Name" class="text-danger small"></span>
+    </div>
+    <div class="col-md-6">
+        <label for="Sku" class="form-label">SKU (optional)</label>
+        <input for="Sku" name="Sku" class="form-control bg-white border-black border-1 rounded-0" placeholder="QF-LAP-01" />
+    </div>
+    <div class="col-md-6">
+        <label for="CategoryId" class="form-label">Category</label>
+        <select for="CategoryId" name="CategoryId" class="form-select js-category-product-select bg-white border-black border-1 rounded-0" required>
+            @foreach (var category in Model.Categories)
+            {
+                if (category.categoryId == Model.Product.categoryId)
+                {
+                    <option value="@category.categoryId" class="text-dark" selected>@category.Name</option>
+                }
+                else
+                {
+                    <option value="@category.categoryId" class="text-dark">@category.Name</option>
+                }
+            }
+        </select>
+        <span for="CategoryId" class="text-danger small"></span>
+    </div>
+    <div class="col-md-6">
+        <label for="Brand" class="form-label">Brand</label>
+        <input for="Brand" name="Brand" value="@Model.Product.Brand" class="form-control bg-white border-black border-1 rounded-0" placeholder="Apple" />
+        <span for="Brand" class="text-danger small"></span>
+    </div>
+    <div class="col-12">
+        <label for="Description" class="form-label">Description</label>
+        <textarea for="Description" name="Description" class="form-control bg-white border-black border-1 rounded-0" rows="3"
+                  placeholder="Specs and product details">@Model.Product.Description</textarea>
+    </div>
+    <div class="col-md-6">
+        <label for="CashPrice" class="form-label">Cash Price (Rs.)</label>
+        <input for="CashPrice" name="CashPrice" value="@Model.Product.CashPrice" type="number" step="0.01" min="0.01" class="form-control bg-white border-black border-1 rounded-0" required />
+        <span for="CashPrice" class="text-danger small"></span>
+    </div>
+    <div class="col-md-6">
+        <label for="StockQuantity" class="form-label">Stock Quantity</label>
+        <input for="StockQuantity" name="StockQuantity" value="@Model.Product.StockQuantity" type="number" min="0" class="form-control bg-white border-black border-1 rounded-0" required />
+        <span for="StockQuantity" class="text-danger small"></span>
+    </div>
+</div>
+
+<div class="soft-panel p-3 mt-4">
+    <h3 class="h6 mb-1">Featured Installment Plan <span class="text-secondary fw-normal">(optional)</span></h3>
+    <p class="small text-secondary">These fields populate the monthly-price section of the original product card.</p>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label for="InstallmentPriceInstallmentPrice" class="form-label">Installment Price (Rs.)</label>
+            <input for="InstallmentPrice" value="@Model.Product.InstallmentPrice" name="InstallmentPrice" type="number" step="0.01" min="0.01" class="form-control bg-white border-black border-1 rounded-0" required />
+            <span for="InstallmentPrice" class="text-danger small"></span>
+        </div>
+        <div class="col-md-4">
+            <label for="DurationMonths" class="form-label">Months</label>
+            <input for="DurationMonths" name="DurationMonths" value="@Model.Product.InstallmentMonths" type="number" min="1" max="60" class="form-control bg-white border-black border-1 rounded-0" />
+        </div>
+        <div class="col-md-4">
+            <label for="DownPayment" class="form-label">Down Payment (Rs.)</label>
+            <input for="DownPayment" name="DownPayment" value="@Model.Product.DownPayment" type="number" min="0" step="0.01" class="form-control bg-white border-black border-1 rounded-0" />
+        </div>
+    </div>
+</div>

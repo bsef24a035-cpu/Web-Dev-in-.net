@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using QistFlow.Data;
 using Qistflow_Semester_Project.Data;
+using Qistflow_Semester_Project.Models.Interfaces;
+using Qistflow_Semester_Project.Models.Repositories;
 
 
 namespace Qistflow_Semester_Project
@@ -28,6 +30,12 @@ namespace Qistflow_Semester_Project
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddSingleton<IDbConnectionFactory, SqlConnectionFactory>();
+
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             builder.Services.AddControllersWithViews();                                                                                                                                                                                                                                                                                                                                                                     
 

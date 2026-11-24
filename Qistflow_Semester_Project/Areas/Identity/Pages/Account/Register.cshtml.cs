@@ -34,6 +34,24 @@ public class RegisterModel : PageModel
         [Required, DataType(DataType.Password)]
         [Compare(nameof(Password), ErrorMessage = "Passwords do not match.")]
         public string ConfirmPassword { get; set; } = "";
+        
+        [Required, DataType(DataType.Text)]
+        public string firstName { get; set; } = "";
+        
+        [Required, DataType(DataType.Text)]
+        public string lastName { get; set; } = "";
+
+        [Required, DataType(DataType.PhoneNumber)]
+        public string phoneNumber { get; set; } = "";
+
+        [Required, DataType(DataType.Text)]
+        public string cnic { get; set; } = "";
+
+        [Required, DataType(DataType.MultilineText)]
+        public string Address { get; set; } = "";
+
+        [Required, DataType(DataType.Date)]
+        public string dateOfBirth { get; set; } = "";
     }
 
     public IActionResult OnGet()
@@ -52,8 +70,14 @@ public class RegisterModel : PageModel
 
         var user = new ApplicationUser
         {
-            UserName = Input.Email.Trim(),
-            Email = Input.Email.Trim()
+            UserName = Input.firstName.Trim(),
+            //PasswordHash = Input.Password.Trim(),
+            Email = Input.Email.Trim(),
+            FirstName = Input.firstName.Trim(),
+            LastName = Input.lastName.Trim(),
+            Cnic = Input.cnic.Trim(),
+            DateOfBirth = DateTime.Parse(Input.dateOfBirth),
+            PhoneNumber = Input.phoneNumber.Trim()
         };
 
         var result = await _userManager.CreateAsync(user, Input.Password);

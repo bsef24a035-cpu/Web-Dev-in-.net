@@ -1,4 +1,7 @@
 ﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
     ViewData["Title"] = "Admin Dashboard";
     <style>
         .stat-card {
@@ -59,7 +62,10 @@
         }
     </style>
 }
-<header>
+@{
+    ViewData["Title"] = "Admin home";
+}
+@* <header>
     <nav class="navbar container gap-3 py-4">
         <a href="@Url.Action("Index", "Admin")">
             <img src="~/assets/logo.svg" class="brand-logo" alt="QistFlow Admin">
@@ -75,7 +81,7 @@
             </form>
         </div>
     </nav>
-</header>
+</header> *@
 
 <main class="container pb-5">
     <section class="p-4 mb-5">
@@ -216,8 +222,3 @@
     </div>
 </main>
 
-<footer class="page-footer py-4">
-    <div class="container small">
-        QistFlow Admin · HTML &amp; Bootstrap classroom project · Sample data
-    </div>
-</footer>

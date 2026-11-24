@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Product Catalog";
+}
+<header>
+    <nav class="navbar container gap-3 py-4">
+        <a asp-controller="Home" asp-action="Index">
+            <img src="~/assets/logo.svg" class="brand-logo" alt="QistFlow" />
+        </a>
+        <div class="d-flex flex-wrap align-items-center gap-3">
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Admin" asp-action="Index" class="btn btn-light">
+                    <i class="bi bi-arrow-left me-1" aria-hidden="true"></i> Admin Dashboard
+                </a>
+            }
+            else
+            {
+                <a asp-controller="Home" asp-action="Index" class="btn btn-light">Customer Home</a>
+            }
+            <a asp-controller="Products" asp-action="Index" class="btn btn-success">Products</a>
+        </div>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form asp-area="Identity" asp-page="/Account/Logout" method="post"
+                  asp-route-returnUrl="@Url.Action("Index", "Home")">
+                <button type="submit" class="btn btn-outline-secondary">Log Out</button>
+            </form>
+        }
+        else
+        {
+            <a asp-area="Identity" asp-page="/Account/Login" asp-route-portal="Customer">Sign In</a>
+        }
+    </nav>
+</header>
+<main class="container pb-5">
+    <div class="hero-panel p-4 mb-5">
+        <p class="section-label">Browse the Collection</p>
+        <h1 class="mb-2">Products &amp; Installment Plans</h1>
+        <p class="mb-0 text-secondary">Search the latest store inventory, compare cash prices and available plans.</p>
+    </div>
+    @await Component.InvokeAsync("ProductCatalog")
+</main>
+<footer class="page-footer py-4">
+    <div class="container small">QistFlow · Product Catalog</div>
+</footer>

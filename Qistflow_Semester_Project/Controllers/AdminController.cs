@@ -8,5 +8,9 @@ namespace Qistflow_Semester_Project.Controllers
         {
             return View();
         }
+        public IActionResult Stock()
+        {
+            return View();
+        }
     }
 }

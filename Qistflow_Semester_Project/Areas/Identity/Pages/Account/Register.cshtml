@@ -163,6 +163,40 @@
             </legend>
 
             <div class="p-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Input.firstName" class="form-label">First Name</label>
+                        <input asp-for="Input.firstName" class="form-control"
+                               autocomplete="off" placeholder="First Name" />
+                        <span asp-validation-for="Input.firstName" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Input.lastName" class="form-label">Last Name</label>
+                        <input asp-for="Input.lastName" class="form-control"
+                               autocomplete="off" placeholder="Last Name" />
+                        <span asp-validation-for="Input.lastName" class="text-danger small"></span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.cnic" class="form-label">CNIC</label>
+                    <input asp-for="Input.cnic" class="form-control" placeholder="12345-1234567-1"
+                           autocomplete="off" />
+                    <span asp-validation-for="Input.cnic" class="text-danger small"></span>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Input.dateOfBirth" class="form-label">Date of Birth</label>
+                        <input asp-for="Input.dateOfBirth" class="form-control"
+                               autocomplete="off" placeholder="Date of Birth" />
+                        <span asp-validation-for="Input.dateOfBirth" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Input.phoneNumber" class="form-label">Phone Number</label>
+                        <input asp-for="Input.phoneNumber" class="form-control"
+                               autocomplete="off" placeholder="Phone Number" />
+                        <span asp-validation-for="Input.phoneNumber" class="text-danger small"></span>
+                    </div>
+                </div>
                 <div class="mb-3">
                     <label asp-for="Input.Email" class="form-label">Email Address</label>
                     <input asp-for="Input.Email" class="form-control" placeholder="you@example.com"
@@ -183,6 +217,13 @@
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
                     </div>
                 </div>
+                <div class="mb-3">
+                    <label asp-for="Input.Address" class="form-label">Address</label>
+                    <input asp-for="Input.Address" class="form-control" placeholder="Enter your address"
+                           autocomplete="street-address" />
+                    <span asp-validation-for="Input.Address" class="text-danger small"></span>
+                </div>
+
             </div>
         </fieldset>
         <button type="submit" class="btn btn-success w-100 py-3">

@@ -1,0 +1,21 @@
+﻿@model List<Product>
+
+@if (Model.Count == 0)
+{
+    <div class="soft-panel p-5 text-center">
+        <i class="bi bi-search fs-1" aria-hidden="true"></i>
+        <h3 class="h4 mt-3">No products found</h3>
+        <p class="text-secondary mb-0">No product Found</p>
+    </div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var product in Model)
+        {
+            <div class="col-sm-6 col-lg-4 col-xl-3">
+                <partial name="_ProductCard" model="product" />
+            </div>
+        }
+    </div>
+}

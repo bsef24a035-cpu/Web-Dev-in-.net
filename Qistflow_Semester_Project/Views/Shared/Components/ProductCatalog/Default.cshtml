@@ -1,0 +1,117 @@
+﻿@using Qistflow_Semester_Project.Models.ViewModel;
+@model ProductCatalog
+@{
+    ProductDetails pd = new ProductDetails
+    {
+        Product = new Product(),
+        Categories = Model.Categories
+    };
+    pd.Product.productId = 0;
+}
+
+<div class="qf-catalog" data-qf-catalog>
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+        <div>
+            <p class="section-label mb-1">QistFlow Catalog</p>
+            <h2 class="h3 mb-0">Explore Products</h2>
+        </div>
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="d-flex flex-row gap-3">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                    <i class="bi bi-plus-circle me-1" aria-hidden="true"></i>Add Product
+                </button>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCategoryCollapse">
+                    <i class="bi bi-plus-lg" aria-hidden="true"></i> Add a New Category
+                </button>
+            </div>
+        }
+    </div>
+
+    <div class="p-3 mb-4 row g-2 align-items-end m-0 js-product-search" style="background-color:#d6c5b3;">
+         <div class="col-12 align-content-center justify-content-center d-flex gap-3">
+            <div class="col-md-7">
+                <label class="form-label fw-bold fs-3" for="qfProductSearch">Search products</label>
+                <input name="search" id="searchData" type="search" class="form-control bg-white" style="font-size: 1.125rem;" placeholder="Search by product, brand, or category" autocomplete="off" />
+            </div>
+            <div class="col-md-2 align-self-end mb-1">
+                <input type="submit" class="btn btn-success w-100" id="qfProductSearch" value="Search"/>
+            </div>
+        </div>
+    </div>
+    <nav class="soft-panel p-3 mb-4 d-flex flex-wrap gap-2" aria-label="Product categories">
+        @foreach (var category in Model.Categories)
+        {
+            <a href="#" class="btn btn-light btn-sm" style="color: black; background-color: white;">@category.Name</a>
+        }
+    </nav>
+    <div data-qf-search-status class="small text-secondary mb-2" role="status" aria-live="polite"></div>
+    @if (Model.Products.Count == 0)
+    {
+        <div class="soft-panel p-5 text-center">
+            <i class="bi bi-search fs-1" aria-hidden="true"></i>
+            <h3 class="h4 mt-3">No products found</h3>
+            <p class="text-secondary mb-0">No product Found</p>
+        </div>
+    }
+    else
+    {
+        <div id="adminSide">
+            <partial name="_productGrid" model="Model.Products"/>
+        </div>
+    }
+</div>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header soft-panel rounded-0">
+                    <h2 class="modal-title h5" id="addProductTitle">Add New Product</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form asp-controller="AdminProducts" asp-action="Create"
+                          method="post" enctype="multipart/form-data" class="js-product-save">
+                        @Html.AntiForgeryToken()
+                        <partial name="_ProductFormFields" model="pd"/>
+                        <div class="text-danger small mt-3" data-form-error role="alert"></div>
+                        <button type="submit" class="btn btn-success w-100 mt-3">
+                            <i class="bi bi-box-seam me-1" aria-hidden="true"></i>Save Product
+                        </button>
+                    </form>
+
+                    <hr class="my-4" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addCategoryCollapse" tabindex="-1"
+         aria-labelledby="addProductTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header soft-panel rounded-0">
+                    <h2 class="modal-title h5" id="addProductTitle">Add New Category</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="p-3">
+                        <form asp-controller="AdminCategories" asp-action="Create" method="post" class="js-category-create">
+                            @Html.AntiForgeryToken()
+                            <label class="form-label" for="qfNewCategory">Category Name</label>
+                            <input id="qfNewCategory" name="Name" class="form-control mb-3 bg-white border-black border-1 rounded-0"
+                                    maxlength="80" required/>
+                            <label for="qfNewCategoryDesc" class="form-label">Description (optional)</label>
+                            <textarea id="qfNewCategoryDesc" name="Description"
+                                      maxlength="500" class="form-control mb-3 bg-white border-black border-1 rounded-0" rows="2"></textarea>
+                            <div class="text-danger small mb-2" data-form-error role="alert"></div>
+                            <button type="submit" class="btn btn-success">Save Category</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

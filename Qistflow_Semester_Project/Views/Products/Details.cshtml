@@ -1,0 +1,94 @@
+﻿@using Qistflow_Semester_Project.Models.ViewModel;
+@model ProductDetails
+@{
+    ViewData["Title"] = Model.Product.Name;
+}
+<header>
+    <nav class="navbar container gap-3 py-4">
+        <a asp-controller="Home" asp-action="Index">
+            <img src="~/assets/logo.svg" class="brand-logo" alt="QistFlow" />
+        </a>
+        <a asp-controller="Products" asp-action="Index" class="btn btn-light">
+            <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Back to Catalog
+        </a>
+    </nav>
+</header>
+<main class="container pb-5">
+    <div class="row g-4 align-items-start">
+        <div class="col-lg-5">
+            <div class="card overflow-hidden">
+                <img src="@(Model.Product.ImageUrl ?? Url.Content("~/assets/laptop.jpg"))"
+                     alt="@Model.Product.Name" class="qf-details-photo" />
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <section class="card p-4 p-lg-5">
+                <h1>@Model.Product.Name</h1>
+                <p class="text-secondary">@Model.Product.Description</p>
+                <div class="soft-panel p-3 my-3">
+                    @if (Model.Product.StockQuantity > 0)
+                    {
+                        <span class="badge text-bg-success">In Stock (@Model.Product.StockQuantity )</span>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-danger">Out of Stock</span>
+                    }
+                </div>
+                <div class="price-panel mb-4">
+                    <p class="small mb-1">Cash price</p>
+                    <strong>Rs. @Model.Product.CashPrice.ToString("N0")</strong>
+                    @if (Model.Product.InstallmentPrice > 0)
+                    {
+                        <hr />
+                        <span class="badge text-bg-warning">Rs. @((Model.Product.InstallmentPrice / Model.Product.InstallmentMonths) - Model.Product.DownPayment) per month</span>
+                        <p class="mt-2 mb-1">@Model.Product.InstallmentMonths months · Down payment: Rs. @((Model.Product.DownPayment).ToString("N0"))</p>
+                        <strong>Total: Rs. @Model.Product.InstallmentPrice.ToString("N0")</strong>
+                    }
+                    else
+                    {
+                        <p class="small mt-2 mb-0">No installment plan configured yet.</p>
+                    }
+                </div>
+                @if (User.IsInRole("Admin"))
+                {
+                    <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                            data-bs-target="#editProductModal">
+                        <i class="bi bi-pencil-square me-1" aria-hidden="true"></i> Update Product
+                    </button>
+                }
+                else
+                {
+                    <p class="small text-secondary">Booking requests will be connected in the next phase.</p>
+                    <button class="btn btn-secondary" disabled type="button">Booking coming next</button>
+                }
+            </section>
+        </div>
+    </div>
+</main>
+<footer class="page-footer py-4"><div class="container small">QistFlow · Product Details</div></footer>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="modal fade" id="editProductModal" tabindex="-1"
+         aria-labelledby="editProductTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header soft-panel rounded-0">
+                    <h2 class="modal-title h5" id="editProductTitle">Update Product</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form asp-controller="AdminProducts" asp-action="Create" method="post"
+                          enctype="multipart/form-data" class="js-product-save">
+                        @Html.AntiForgeryToken()
+                        <partial name="_ProductFormFields" model="Model"/>
+                        <div class="text-danger small mt-3" data-form-error role="alert"></div>
+                        <button class="btn btn-success w-100 mt-3" type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
